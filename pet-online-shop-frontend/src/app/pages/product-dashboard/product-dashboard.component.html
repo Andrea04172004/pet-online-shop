@@ -1,0 +1,123 @@
+<div class="container mt-5">
+  <div class="card mb-4">
+    <div class="card-header text-center">Product Dashboard</div>
+    <div class="card-body">
+      <div class="form-inline my-4 d-flex justify-content-between">
+        <label>Select
+          <select class="custom-select custom-select-sm form-control form-control-sm mx-2" [value]="productPerPage"
+                  (change)="changePageSize($event.target.value)">
+            <option value="3">3 per Page</option>
+            <option value="4">4 per Page</option>
+            <option value="6">6 per Page</option>
+            <option value="8">8 per Page</option>
+          </select>
+        </label>
+        <div id="dataTable_filter" class="dataTables_filter ">
+          <label>Search
+            <input type="search" [(ngModel)]="searchField"
+                   aria-label="Search"
+                   class="form-control form-control-sm mx-2" aria-controls="dataTable">
+          </label>
+        </div>
+      </div>
+      <div class="datatable">
+        <table id="prod1Table" class="table table-bordered table-hover table-responsive-lg">
+          <thead>
+          <tr>
+            <th scope="col">№</th>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Expiration date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Category</th>
+            <th scope="col">Product Label</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr  *ngFor="let htmlProducts of getAllProducts(); let i = index; ">
+            <td>
+              {{i + 1}}
+            </td>
+            <td>
+                <span id="name"
+                      (input)="updateList(htmlProducts.id, 'name', $event)"
+                      contenteditable="true">{{htmlProducts.name}}</span>
+            </td>
+            <td class="p-0">
+              <div id="img">
+                <img alt="productImage" style="width: 50px; cursor: pointer; outline: none"
+                     routerLink="/product-details/{{htmlProducts.id}}"
+                     [src]="htmlProducts.image[0]"></div>
+            </td>
+            <td>
+            <span contenteditable="true" id="price"
+                  (input)="updateList(htmlProducts.id, 'price', $event)">{{htmlProducts.price}}</span>
+            </td>
+            <td>
+
+              <input id="expiration"
+                     class="custom-select w-75" contenteditable="true" type="date" [value]="htmlProducts.expirationDate"
+                     (input)="updateList(htmlProducts.id, 'expirationDate', $event)">
+
+            </td>
+            <td>
+            <span contenteditable="true" id="quantity"
+                  (input)="updateList(htmlProducts.id, 'quantity', $event)">{{htmlProducts.quantity}}</span>
+            </td>
+            <td>
+              <select class="custom-select" id="categorySelect"
+                      (change)="updateList(htmlProducts.id, 'category', $event)">
+                <option class="active">{{htmlProducts.category}}</option>
+
+                <option *ngFor="let category of getAllCategories(htmlProducts.category)"
+                        value="{{category.name}}">{{category.name}}</option>
+              </select>
+            </td>
+
+            <td>
+              <select id="labelSelect"
+                      class="custom-select" (change)="updateList(htmlProducts.id, 'productLabel', $event)">
+                <option class="active">{{htmlProducts.productLabel}}</option>
+                <option contenteditable="true" *ngFor="let label of keys(labels)"
+                        [ngValue]="keys(label)">
+                  {{label}}</option>
+              </select>
+            </td>
+
+            <td>
+              <button id="delProd" (click)="deleteProduct(htmlProducts.id)"
+                      type="button" size="sm" class="btn btn-outline-danger  my-0">Remove
+              </button>
+            </td>
+
+          </tr>
+
+          </tbody>
+        </table>
+        <app-add-product></app-add-product>
+      </div>
+      <div class="row d-flex justify-content-between px-4 py-2">
+        <div>
+          Showing 1 to {{productPerPage}} of {{getAllProducts().length}} entries
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link btn-outline-primary" (click)="changePage(selectedPage-1)">Previous</a>
+            </li>
+
+            <li class="page-item" *counter="let page of pageCount" >
+              <a (click)="changePage(page)"
+                 [class.active]="page == selectedPage" class="page-link btn-outline-primary rounded-0" >{{page}}</a></li>
+
+            <li class="page-item">
+              <a class="page-link btn-outline-primary" (click)="changePage(selectedPage+1)">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

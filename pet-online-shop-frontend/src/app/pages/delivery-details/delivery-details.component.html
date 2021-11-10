@@ -1,0 +1,51 @@
+<div class="container w-100 mt-5">
+  <form [formGroup]="deliveryForm" class="normal-form">
+    <div class="control-column">
+      <mat-grid-list cols="1" rowHeight="200">
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field appearance="standard">
+              <mat-label>First Name</mat-label>
+              <input formControlName="firstName" matInput placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Last Name</mat-label>
+              <input formControlName="lastName" matInput placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput placeholder="Email">
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field appearance="standard">
+              <mat-select (click)="onChangePhone()" formControlName="phoneList" required placeholder="Phone number">
+                <mat-option (click)="onAddPhone()">Add Phone</mat-option>
+                <mat-option *ngFor="let phone of user.phoneList" [value]="phone">
+                  {{phone}}
+                </mat-option>
+
+                <!--    here should be list of phones-->
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-select (click)="onChangeAddress()" formControlName="addressList" required placeholder="Address">
+                <mat-option (click)="onAddAddress()">Add address</mat-option>
+                <mat-option *ngFor="let address of user.addressDtoSet" [value]="address">
+                  {{getFormattedRow(address)}}
+                </mat-option>
+
+                <!--    here should be list of addresses-->
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </form>
+</div>

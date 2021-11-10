@@ -1,0 +1,186 @@
+<div class="row m-3">
+  <div id="user" class="col-lg-3">
+    <!-- Billing card 2-->
+    <div class="card h-100 border-left-lg border-left-secondary">
+      <div class="card-body">
+        <div style="display: inline">
+          <div class="row card-body justify-content-center p-0 mt-lg-4">
+            <div class="col-lg-auto mb-4">
+              <div class="text-xl  text-dark">{{order.userShortResponseDto.firstName}}</div>
+            </div>
+            <div class="col-lg-auto mb-4">
+              <div class="text-xl text-dark">{{order.userShortResponseDto.lastName}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="address" class="col-lg-3">
+    <!-- Billing card 3-->
+    <div class="card h-100 border-left-lg border-left-success">
+      <div class="card-body">
+        <div class="row card-body justify-content-center p-0">
+          <div class="col-lg-auto mx-3 p-0">
+            <div class="text-lg text-muted ">City</div>
+            <div class="display-4 text-dark">{{order.addressDto.city}}</div>
+          </div>
+          <div class="col-lg-auto mx-3">
+            <div class="row">
+              <div class="text-lg text-muted">Street: </div>
+              <div class="text-dark text-lg mx-2">{{order.addressDto.street}}</div>
+            </div>
+            <div class="row">
+              <div class="text-lg text-muted">Building:</div>
+              <div class="text-dark text-lg mx-2">{{order.addressDto.buildingNumber}}</div>
+            </div>
+            <div class="row">
+              <div class="text-lg text-muted ">Apartment:</div>
+              <div class="text-dark text-lg mx-2">{{order.addressDto.apartmentNumber}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="orderInfo" class="col-lg-3">
+    <!-- Billing card 3-->
+    <div class="card h-100 border-left-lg border-left-primary">
+      <div class="row card-body justify-content-between">
+        <div class="col-lg-auto">
+          <div class="text-lg text-muted">Order price</div>
+          <div class="display-4 text-dark text-md-center">{{order.orderPrice}}</div>
+        </div>
+        <div class="col-lg-auto">
+          <div class="text-lg text-muted">Lines</div>
+          <div class="display-4 text-dark text-md-center">{{order.lineItemDtoSet.length}}</div>
+        </div>
+        <div class="col-lg-auto">
+          <div class="text-lg text-muted">Discount</div>
+          <div class="display-4 text-dark text-md-center">{{order.discountDto.percent}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="orderStatusNew" *ngIf="orderStatus == 'NEW' " class="col-lg-3">
+    <!-- Billing card 1-->
+    <div class="card h-100 border-left-lg border-left-success alert-success">
+      <div class="card-body d-flex align-items-center justify-content-center p-0">
+        <div class="text-center display-3">{{order.status}}</div>
+      </div>
+    </div>
+  </div>
+  <div id="orderStatusClosed" *ngIf="orderStatus == 'CLOSED'" class="col-lg-3">
+    <!-- Billing card 1-->
+    <div class="card h-100 border-left-lg border-left-danger alert-danger">
+      <div class="card-body d-flex align-items-center justify-content-center p-0">
+        <div class="text-center display-3">{{order.status}}</div>
+      </div>
+    </div>
+  </div>
+  <div id="orderStatusPaid" *ngIf="orderStatus == 'PAID'" class="col-lg-3">
+    <!-- Billing card 1-->
+    <div class="card h-100 border-left-lg border-left-info alert-info">
+      <div class="card-body d-flex align-items-center justify-content-center p-0">
+        <div class="text-center display-3">{{order.status}}</div>
+      </div>
+    </div>
+  </div>
+  <div id="orderStatusUnpaid" *ngIf="orderStatus == 'UNPAID'" class="col-lg-3">
+    <!-- Billing card 1-->
+    <div class="card h-100 border-left-lg border-left-warning alert-warning">
+      <div class="card-body d-flex align-items-center justify-content-center p-0">
+        <div class="text-center display-3">{{order.status}}</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="lineItems" class="card card-collapsable m-3">
+  <a class="card-header" href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true"
+     aria-controls="collapseCardExample">Order line items
+    <div class="card-collapsable-arrow">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </a>
+  <div class="collapse show" id="collapseCardExample">
+    <div id="paymentTable" class="card m-2 ">
+      <div class="card-body p-0">
+        <!-- Billing history table-->
+        <div class="table-hover table-responsive table-billing-history">
+          <table class="table mb-0">
+            <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Product name</th>
+              <th scope="col">Product price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let line of order.lineItemDtoSet; let i = index">
+              <td>{{i + 1}}</td>
+              <td><a routerLink="/product-details/{{line.product.id}}">{{line.product.name}}</a></td>
+              <td>{{line.product.price}}</td>
+              <td>{{line.quantity}}</td>
+              <td>{{line.subPrice}}</td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="payments" class="card card-collapsable m-3">
+  <a class="card-header" href="#collapseCardExample2" data-toggle="collapse" role="button" aria-expanded="true"
+     aria-controls="collapseCardExample2">Payments
+    <div class="card-collapsable-arrow">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </a>
+  <div class="collapse show" id="collapseCardExample2">
+    <div id="paymentTable2" class="card m-2 ">
+      <div class="card-body p-0">
+        <!-- Billing history table-->
+        <div class="table-responsive table-billing-history">
+          <table class="table-hover table mb-0">
+            <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Is cash</th>
+              <th scope="col">Client name</th>
+              <th scope="col">Attachment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let payment of order.paymentsDto; let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{payment.date}}</td>
+              <td>{{payment.time}}</td>
+              <td>{{payment.amount}}</td>
+              <td>{{payment.isCash}}</td>
+              <td>{{payment.clientName}}</td>
+              <td>{{payment.attachment}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,353 @@
+<main>
+
+  <!-- Main page content-->
+  <div class="container-fluid">
+
+    <hr class="mt-0 mb-4"/>
+    <div class="row">
+      <div class="col-xl-4">
+
+        <!-- Profile picture card-->
+        <div class="card">
+          <div class="card-header text-#0061f2">Profile Picture</div>
+          <div class="card-body text-center">
+            <!-- Profile picture image-->
+            <img id="userImage" class="img-account-profile rounded-circle mb-2"
+                 src="https://source.unsplash.com/QAB-WJcbgJk/300x300" alt=""/>
+            <!--                <div>{{user.image}}</div>--> <!--TODO we don't have image in User-->
+            <!-- Profile picture help block-->
+            <div
+              class="small font-weight-700 font-italic text-gray-600 mb-4">{{user?.firstName + " " + user?.lastName}}
+
+            </div>
+            <!-- Profile picture upload button-->
+            <!--                <button class="btn btn-primary" type="button">Upload new image</button>-->
+            <!-- Form Row        -->
+            <div class="form-row">
+              <!-- Form Group (Created)-->
+              <div class="form-group col-sm-4">
+                <div class="small font-weight-bold text-primary-soft mb-0 my-0" for="labCreated">profile created</div>
+                <div class="form-control-sm small font-italic text-muted mb-4 my-0" id="labCreated"
+                     type="text"> {{user?.created}}</div>
+              </div>
+              <!-- Form Group (Updated)-->
+              <div class="form-group col-md-4">
+                <div class="small font-weight-bold text-primary-soft mb-0 my-0" for="labUpdated">profile updated</div>
+                <div class="form-control-sm small font-italic text-muted mb-4 my-0" id="labUpdated"
+                     type="text"> {{user?.updated}}</div>
+              </div>
+              <!-- Form Group (lastVisit)-->
+              <div class="form-group col-md-4">
+                <div class="small font-weight-bold text-primary-soft mb-0 my-0" for="labLastVisit">last visit</div>
+                <div class="form-control-sm small font-italic text-muted mb-4 my-0" id="labLastVisit"
+                     type="text"> {{user?.lastVisit}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8">
+
+
+        <mat-tab-group dynamicHeight>
+          <mat-tab label="User's details">
+            <!-- Account details card-->
+            <div class="card mb-4">
+              <div class="card-header">Account Details</div>
+              <div class="card-body">
+                <form>
+
+                  <!-- Form Row-->
+                  <div class="form-row">
+                    <!-- Form Group (id)-->
+                    <div class="form-group col-md-2">
+                      <label class="small mb-1" for="labId">User's Id</label>
+                      <div class="form-control" id="labId" type="text"> {{user?.id}}</div>
+                    </div>
+                    <!-- Form Group (first name)-->
+                    <div class="form-group col-md-5">
+                      <label class="small mb-1" for="labFirstName">First name</label>
+                      <div class="form-control" id="labFirstName" type="text"> {{user?.firstName}}</div>
+                    </div>
+                    <!-- Form Group (last name)-->
+                    <div class="form-group col-md-5">
+                      <label class="small mb-1" for="labLastName">Last name</label>
+                      <div class="form-control" id="labLastName" type="text"> {{user?.lastName}}</div>
+                    </div>
+                  </div>
+
+                  <!-- Form Row        -->
+                  <div class="form-row">
+                    <!-- Form Group (Role)-->
+                    <div class="form-group col-md-6">
+                      <label class="small mb-1" for="labRole">Role</label>
+                      <div class="form-control" id="labRole" type="text"> {{user?.role}}</div>
+                    </div>
+                    <!-- Form Group (Active)-->
+                    <div class="form-group col-md-6">
+                      <label class="small mb-1" for="labActive">Active</label>
+                      <div class="form-control" id="labActive" type="text"> {{user?.active}}</div>
+                    </div>
+                  </div>
+
+                  <!-- Form Row-->
+                  <div class="form-row">
+                    <!-- Form Group (email address)-->
+                    <div class="form-group col-md-6">
+                      <label class="small mb-1" for="labEmailAddress">Email address</label>
+                      <div class="form-control" id="labEmailAddress" type="text"> {{user?.email}}</div>
+                    </div>
+                    <!-- Form Group (phone number)-->
+                    <div class="form-group col-md-6">
+                      <label class="small mb-1" for="labPhone">Phone number</label>
+                      <select class="form-control" id="labPhone"
+                              (change)="updateList(user?.id, 'phoneList', $event)">
+                        <option class="active">{{user?.phoneList[0]}}</option>
+
+                        <option *ngFor="let phone of getAllPhoneNumbers()"
+                                value="{{phone}}">{{phone}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </mat-tab>
+
+
+          <mat-tab label="Addresses">
+            <div class="card mb-4">
+              <div class="card-header">User's addresses</div>
+              <div class="card-body">
+                <form>
+
+                  <!--                <div *ngIf="address.length > 1">-->
+                  <!--                  <label>User's address</label>-->
+                  <div *ngFor="let addresses of user?.addressDtoSet" class="form-row">
+                    <!-- Form Group (city)-->
+                    <div class="form-group col-md-3">
+                      <label class="small mb-1" for="labCity">City</label>
+                      <div class="form-control" id="labCity" type="text"> {{addresses.city}}</div>
+                    </div>
+                    <!-- Form Group (street)-->
+                    <div class="form-group col-md-5">
+                      <label class="small mb-1" for="labStreet">Street</label>
+                      <div class="form-control" id="labStreet" type="text"> {{addresses.street}}</div>
+                    </div>
+                    <!-- Form Group (building)-->
+                    <div class="form-group col-md-2">
+                      <label class="small mb-1" for="labBuild">Building</label>
+                      <div class="form-control" id="labBuild" type="text"> {{addresses.buildingNumber}}</div>
+                    </div>
+                    <!-- Form Group (apartment)-->
+                    <div class="form-group col-md-2">
+                      <label class="small mb-1" for="labAppartm">Apartment</label>
+                      <div class="form-control" id="labAppartm" type="text"> {{addresses.apartmentNumber}}</div>
+                    </div>
+                  </div>
+                  <!--                </div>-->
+                </form>
+              </div>
+            </div>
+          </mat-tab>
+
+
+          <mat-tab label="Orders">
+            <div class="card mb-4">
+              <div class="card-header">User's orders</div>
+              <div class="card-body">
+                <form>
+
+                  <!--    <label>User's orders</label>     -->
+                  <div *ngFor="let order of user?.orders; let i = index" id="lineItems"
+                       class="form-row card card-collapsable mb-1 p-0 col-lg-12 align-content-center">
+                    <a class="card-header w-100" href="#collapseCardExample{{i}}" data-toggle="collapse" role="button"
+                       aria-expanded="true"
+                       aria-controls="collapseCardExample">
+
+
+                      <div *ngIf="order.status == 'NEW' " class="col-4 border-left border-left-success border-left-lg">
+                      <div class="text-sm text-muted">{{"№ " + order.id + " date: " + order.created}}</div>
+                      <div class="text-md">{{order.status}}</div>
+                        </div>
+
+                      <div *ngIf="order.status == 'CLOSED' " class="col-4 border-left border-left-danger border-left-lg">
+                        <div class="text-sm text-muted">{{"№ " + order.id + " date: " + order.created}}</div>
+                        <div class="text-md">{{order.status}}</div>
+                      </div>
+
+                      <div *ngIf="order.status == 'PAID' " class="col-4 border-left border-left-info border-left-lg">
+                        <div class="text-sm text-muted">{{"№ " + order.id + " date: " + order.created}}</div>
+                        <div class="text-md">{{order.status}}</div>
+                      </div>
+
+                      <div *ngIf="order.status == 'UNPAID' " class="col-4 border-left border-left-warning border-left-lg">
+                        <div class="text-sm text-muted">{{"№ " + order.id + " date: " + order.created}}</div>
+                        <div class="text-md">{{order.status}}</div>
+                      </div>
+
+                      <div class="col-4">
+                        <div class="text-sm text-muted">{{"Order's amount"}}</div>
+                        <div class="text-md">{{order.orderPrice}}</div>
+                      </div>
+
+                      <div class= "card-collapsable-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                      </div>
+                    </a>
+
+
+                    <div class="collapse" id="collapseCardExample{{i}}">
+                      <div id="orderTable" class="card m-2 ">
+                        <div class="card-body p-0">
+
+
+                          <!--                         Table Order's details    -->
+                          <div class="toast-header text-primary-soft font-weight-bold">Order's details</div>
+                          <div class="dataTable">
+                            <table class="table table-responsive-xl mb-0">
+                              <thead>
+                              <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Order Price</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Created</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                <td>{{order.id}}</td>
+                                <td>{{order.orderPrice}}</td>
+                                <td>{{order.discountDto.percent}}</td>
+                                <td>{{order.created}}</td>
+                              </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <!--               Table lineEntities    -->
+                          <div class="toast-header text-primary-soft font-weight-bold">Line items</div>
+                          <div class="dataTable">
+                            <table class="table table-responsive-xl mb-0">
+                              <thead>
+                              <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Product name</th>
+                                <th scope="col">Product price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let line of order.lineItemDtoSet; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{line.product.name}}"></td>
+                                <td>{{line.product.price}}</td>
+                                <td>{{line.quantity}}</td>
+                                <td>{{line.subPrice}}</td>
+                              </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <!--               Table Payments    -->
+                          <div class="toast-header text-primary-soft font-weight-bold">Payments</div>
+                          <div class="dataTable">
+                            <table class="table table-hover table-responsive-xl  mb-0">
+                              <thead>
+                              <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Is cash</th>
+                                <th scope="col">Client name</th>
+                                <th scope="col">Attachment</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let payment of order.paymentsDto; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{payment.date}}</td>
+                                <td>{{payment.time}}</td>
+                                <td>{{payment.amount}}</td>
+                                <td>{{payment.isCash}}</td>
+                                <td>{{payment.clientName}}</td>
+                                <td>{{payment.attachment}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <!--               Table Address    -->
+                          <div class="toast-header text-primary-soft font-weight-bold">Address</div>
+                          <div class="dataTable">
+                            <table class="table table-responsive-xl mb-0">
+                              <thead>
+                              <tr>
+                                <th scope="col">City</th>
+                                <th scope="col">Street</th>
+                                <th scope="col">Building</th>
+                                <th scope="col">Apartment</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                <td>{{order.addressDto.city}}</td>
+                                <td>{{order.addressDto.street}}</td>
+                                <td>{{order.addressDto.buildingNumber}}</td>
+                                <td>{{order.addressDto.apartmentNumber}}</td>
+                              </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!--                        </div>-->
+
+                </form>
+              </div>
+            </div>
+          </mat-tab>
+
+
+          <!--    <label>User's credit cards</label>     -->
+          <mat-tab label="Credit cards">
+            <div class="card mb-4">
+              <div class="card-header">User's credit cards</div>
+              <div class="card-body">
+                <form>
+                  <!-- Form Row   Credit cards     -->
+                  <div *ngFor="let credCards of user?.creditCardDto" class="form-row">
+                    <!-- Form Group (Card number)-->
+                    <div class="form-group col-md-5">
+                      <label class="small mb-1" for="labCardNumber">Card number</label>
+                      <div class="form-control" id="labCardNumber" type="text"> {{credCards.cardNumber}}</div>
+                    </div>
+                    <!-- Form Group (Expiration Date)-->
+                    <div class="form-group col-md-3">
+                      <label class="small mb-1" for="labExpirationDate">Expiration Date</label>
+                      <div class="form-control" id="labExpirationDate" type="text"> {{credCards.expirationDate}}</div>
+                    </div>
+                    <!-- Form Group (card Type)-->
+                    <div class="form-group col-md-4">
+                      <label class="small mb-1" for="labCardType">Card Type</label>
+                      <div class="form-control" id="labCardType" type="text"> {{credCards.cardType}}</div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="footer mt-auto footer-light">
+</footer>

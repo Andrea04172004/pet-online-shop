@@ -1,0 +1,46 @@
+<div class="container-fluid d-flex justify-content-center my-5 px-0">
+  <div class="col-xl-9">
+  <mat-horizontal-stepper linear #stepper >
+
+    <mat-step [completed]="firstStep">
+        <ng-template matStepLabel>Cart check</ng-template>
+        <app-order-confirmation></app-order-confirmation>
+
+        <div  class="d-flex justify-content-between mt-2">
+          <button class="btn btn-lg btn-primary" matStepperNext id="firstStepNext">Next<i class="fas fa-arrow-right ml-2"></i></button>
+        </div>
+    </mat-step>
+
+    <mat-step  [completed]="secondStep">
+        <ng-template matStepLabel>Billing details</ng-template>
+        <app-payment-component></app-payment-component>
+        <div class="d-flex justify-content-between mt-2">
+          <button class="btn btn-lg btn-primary" matStepperPrevious id="secondStepBack"><i class="fas fa-arrow-left mr-2"></i>Back</button>
+          <button class="btn btn-lg btn-primary" matStepperNext id="secondStepNext">Next<i class="fas fa-arrow-right ml-2"></i></button>
+        </div>
+    </mat-step>
+
+    <mat-step [completed]="thirdStep">
+        <ng-template matStepLabel>Delivery details</ng-template>
+        <app-delivery-details></app-delivery-details>
+      <div class="d-flex justify-content-between mt-2">
+        <button class="btn btn-lg btn-primary" id="thirdBack" matStepperPrevious><i class="fas fa-arrow-left mr-2"></i>Back</button>
+        <button class="btn btn-lg btn-primary" id="thirdNext" matStepperNext>Next<i class="fas fa-arrow-right ml-2"></i></button>
+      </div>
+    </mat-step>
+
+    <mat-step [completed]="fourthStep">
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+
+      <div class="d-flex justify-content-between mt-2">
+        <button class="btn btn-lg btn-primary" id="fourthStepBack" matStepperPrevious><i class="fas fa-arrow-left mr-2"></i>Back</button>
+        <button class="btn btn-lg btn-success" id="submit">Submit</button>
+      </div>
+
+    </mat-step>
+
+  </mat-horizontal-stepper>
+  </div>
+</div>
+

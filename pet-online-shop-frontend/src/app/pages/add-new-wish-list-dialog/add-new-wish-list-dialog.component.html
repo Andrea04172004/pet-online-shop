@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <h1 mat-dialog-title class="text-center">New wish list</h1>
+  <div mat-dialog-content class="p-0">
+    <div class="form-group px-2">
+      <label for="exampleInputEmail1">Wish list title</label>
+      <input matInput id="exampleInputEmail1" class="form-control" [(ngModel)]="data.title">
+    </div>
+    <div class="d-flex justify-content-between">
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button type="submit" class="btn btn-primary" [mat-dialog-close]="data.title">Submit</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class='container'>
+  <h2>Card Number Validator</h2>
+  <form [formGroup]="cardNumberGroup">
+    <input
+      [formControl]="getCardNumberControl()"
+      [textMask]="{mask: cardMaskFunction, guide: false, showMask: true}"
+      placeholder="Card Number">
+
+    <div *ngIf="getCardNumberControl().dirty">
+      <p [class.invalid]="getCardNumberControl().invalid"></p>
+      <p [class.valid]="getCardNumberControl().valid"></p>
+    </div>
+  </form>
+</div>

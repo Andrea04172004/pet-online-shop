@@ -1,0 +1,5 @@
+.imgList:hover{
+  cursor: pointer;
+  border-width: 2px;
+  border-color: #42A948;
+}

@@ -1,0 +1,130 @@
+<div class="container-fluid p-0 animated--fade-in">
+  <div class="row justify-content-start">
+    <div class="col-xxl-6 col-xl-8">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="billingForm" (submit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="cardHolderName"
+                       [ngClass]="billingForm.controls['cardHolderName'].invalid ? 'text-danger' : ''">Name on
+                  card:</label>
+                <input id="cardHolderName" [(ngModel)]="creditCard.cardType"
+                       formControlName="cardHolderName" type="text" class="form-control"
+                       [ngClass]="billingForm.controls['cardHolderName'].invalid ? 'is-invalid' : ''">
+                <label class="col m-0" *ngIf="billingForm != null"
+                       [ngClass]="billingForm.controls['cardHolderName'].hasError('required') ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['cardHolderName'].hasError('required') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Name on card can not be empty
+                </label>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="cardNumber" [ngClass]="billingForm.controls['cardNumber'].invalid ? 'text-danger' : ''">Card
+                  number:</label>
+                <input maxlength="16" [(ngModel)]="creditCard.cardNumber"
+                       id="cardNumber" formControlName="cardNumber" type="text" class="form-control"
+                       [ngClass]="billingForm.controls['cardNumber'].invalid ? 'is-invalid' : ''">
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['cardNumber'].hasError('required') || billingForm.controls['cardNumber'].hasError('numberLengthCard')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['cardNumber'].hasError('required') ||
+                  billingForm.controls['cardNumber'].hasError('numberLengthCard') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be 16 digits!
+                </label>
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['cardNumber'].hasError('required') || billingForm.controls['cardNumber'].hasError('onlyNumbersCard')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['cardNumber'].hasError('required') ||
+                  billingForm.controls['cardNumber'].hasError('onlyNumbersCard') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be only digits!
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="expirationMonth"
+                       [ngClass]="billingForm.controls['expirationMonth'].invalid ? 'text-danger' : ''">Card expiry
+                  month:</label>
+                <input maxlength="2"  [(ngModel)]="month"
+                       id="expirationMonth" formControlName="expirationMonth" type="text"
+                       class="form-control"
+                       [ngClass]="billingForm.controls['expirationMonth'].invalid ? 'is-invalid' : ''">
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['expirationMonth'].hasError('required') || billingForm.controls['expirationMonth'].hasError('numberLengthExpMonth')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['expirationMonth'].hasError('required') ||
+                  billingForm.controls['expirationMonth'].hasError('numberLengthExpMonth') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be 2 digits!
+                </label>
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['expirationMonth'].hasError('required') || billingForm.controls['expirationMonth'].hasError('onlyNumbersExpMonth')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['expirationMonth'].hasError('required') ||
+                  billingForm.controls['expirationMonth'].hasError('onlyNumbersExpMonth') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be only digits!
+                </label>
+              </div>
+
+
+              <div class="form-group col-md-4">
+                <label for="expirationYear"
+                       [ngClass]="billingForm.controls['expirationYear'].invalid ? 'text-danger' : ''">Card expiry
+                  year:</label>
+                <input maxlength="4" [(ngModel)]="year"
+                       id="expirationYear" formControlName="expirationYear" type="text" class="form-control"
+                       [ngClass]="billingForm.controls['expirationYear'].invalid ? 'is-invalid' : ''">
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['expirationYear'].hasError('required') || billingForm.controls['expirationYear'].hasError('numberLengthExpYear')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['expirationYear'].hasError('required') ||
+                  billingForm.controls['expirationYear'].hasError('numberLengthExpYear') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be 4 digits!
+                </label>
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['expirationYear'].hasError('required') || billingForm.controls['expirationYear'].hasError('onlyNumbersExpYear')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['expirationYear'].hasError('required') ||
+                  billingForm.controls['expirationYear'].hasError('onlyNumbersExpYear') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be only digits!
+                </label>
+              </div>
+
+
+              <div class="form-group col-md-4">
+                <label for="cvv" [ngClass]="billingForm.controls['cvv'].invalid ? 'text-danger' : ''">CVV:</label>
+                <input maxlength="3"
+                       id="cvv" formControlName="cvv" type="text" class="form-control"
+                       [ngClass]="billingForm.controls['cvv'].invalid ? 'is-invalid' : ''">
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['cvv'].hasError('required') || billingForm.controls['cvv'].hasError('numberLengthCVV')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['cvv'].hasError('required') ||
+                  billingForm.controls['cvv'].hasError('numberLengthCVV') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be 3 digits!
+                </label>
+                <label class="col m-0"
+                       [ngClass]="billingForm.controls['cvv'].hasError('required') || billingForm.controls['cvv'].hasError('onlyNumbersCVV')  ? 'text-danger' : 'text-success'">
+                  <i class="material-icons">{{ billingForm.controls['cvv'].hasError('required') ||
+                  billingForm.controls['cvv'].hasError('onlyNumbersCVV') ? 'cancel' :
+                    'check_circle' }}</i>
+                  Must be only digits!
+                </label>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+
+              <button id="sign-up-button" [disabled]="billingForm.invalid" type="submit"
+                      class="btn btn-primary font-weight-bold">Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

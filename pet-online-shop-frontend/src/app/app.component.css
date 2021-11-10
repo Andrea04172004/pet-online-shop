@@ -1,0 +1,7 @@
+ng-sidebar-container{
+  height: 100vh;
+}
+::ng-deep .ng-sidebar{
+  background: #ffffff;
+  width: 250px;
+}

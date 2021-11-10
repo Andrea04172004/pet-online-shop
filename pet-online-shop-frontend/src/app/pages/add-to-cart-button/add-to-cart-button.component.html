@@ -1,0 +1,14 @@
+<div class="container">
+  <button (click)="onClick()" mat-icon-button color="primary" style="outline: none" aria-label="Example icon button with a home icon" class="cart-icon">
+    <div class="row">
+
+      <mat-icon class="col-xl-12 ">add_shopping_cart
+        <mat-icon class="done-icon" *ngIf="added" style="z-index: 5; position: absolute; margin-top: 10px;">
+          done
+        </mat-icon>
+      </mat-icon>
+    </div>
+  </button>
+</div>
+
+

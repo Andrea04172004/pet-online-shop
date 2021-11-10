@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center">
+  <div class="card w-100">
+    <div class="card-header rounded-0 bg-gradient-primary-to-secondary text-center text-white">Payment methods</div>
+    <div class="card-body">
+      <label id="example-radio-group-label" class="h3">Select your payment method</label>
+      <mat-radio-group color="primary"
+                       aria-labelledby="example-radio-group-label"
+                       class="example-radio-group"
+                       [(ngModel)]="paymentMethod">
+        <div class="container-fluid">
+          <div class="row" *ngFor="let method of methods">
+            <div class="col">
+              <mat-radio-button class="example-radio-button" id="{{method}}" [value]="method" (click)="onSelectMethod(method)">
+                {{method}}
+              </mat-radio-button>
+            </div>
+          </div>
+        </div>
+
+      </mat-radio-group>
+
+      <div class="container-fluid p-0">
+        <div class="col-xl-12 p-0">
+          <mat-form-field class="ml-5" *ngIf="paymentMethod == 'Credit card'" appearance="fill">
+            <mat-label>Credit cards</mat-label>
+            <mat-select (click)="onChange($event)" [formControl]="cardControl" required>
+              <mat-option (click)="addCreditCard = true; userService.isCreditCardAdded = false" >Add credit card</mat-option>
+              <mat-option (click)="onSelect(cards.cardNumber)" *ngFor="let cards of creditCards" [value]="cards">
+                {{cards.cardNumber}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="cardControl.hasError('required')">Please choose credit card</mat-error>
+          </mat-form-field>
+
+
+          <div *ngIf="userService.isCreditCardAdded == false">
+            <div *ngIf="paymentMethod == 'Credit card'">
+              <app-billing-details *ngIf="addCreditCard"></app-billing-details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

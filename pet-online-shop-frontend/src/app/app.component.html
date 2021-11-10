@@ -1,0 +1,27 @@
+
+<!--<app-registration></app-registration>-->
+
+<!--<app-add-product></app-add-product>-->
+
+<!--&lt;!&ndash;<app-add-category></app-add-category>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<app-update-product></app-update-product>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<app-login></app-login>&ndash;&gt;-->
+
+<!--<app-product-dashboard></app-product-dashboard>-->
+
+
+<!--<app-side-navbar></app-side-navbar>-->
+
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" position="left" mode="over" showBackdrop="true" closeOnClickOutside="true">
+    <app-side-navbar></app-side-navbar>
+  </ng-sidebar>
+
+  <div ng-sidebar-content>
+    <app-header-menu></app-header-menu>
+    <router-outlet></router-outlet>
+  </div>
+</ng-sidebar-container>
+

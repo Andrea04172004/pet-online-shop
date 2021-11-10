@@ -1,0 +1,69 @@
+<!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Product Dashboard</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success">
+
+        </a>
+      </span>
+      <table class="table table-bordered table-responsive-md table-striped text-center ">
+        <thead class="bg-info">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Expiration date</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Category</th>
+          <th scope="col">Product Label</th>
+        </tr>
+        </thead>
+        <tr *ngFor="let htmlProducts of getAllProducts();">
+          <td>
+            <span
+              (input)="updateList(htmlProducts.id, 'name', $event)" contenteditable="true">{{htmlProducts.name}}</span>
+          </td>
+          <td>
+            <span contenteditable="true"
+                  (input)="updateList(htmlProducts.id, 'price', $event)">{{htmlProducts.price}}</span>
+          </td>
+          <td>
+            <span contenteditable="true"
+                  (input)="updateList(htmlProducts.id, 'expirationDate', $event)">{{htmlProducts.expirationDate}}</span>
+          </td>
+          <td>
+            <span contenteditable="true"
+                  (input)="updateList(htmlProducts.id, 'quantity', $event)">{{htmlProducts.quantity}}</span>
+          </td>
+          <td>
+            <span contenteditable="true"
+                  (input)="updateList(htmlProducts.id, 'category', $event)">{{htmlProducts.category}}</span>
+          </td>
+          <td>
+            <span contenteditable="true"
+                  (input)="updateList(htmlProducts.id, 'productLabel', $event)">{{htmlProducts.productLabel}}</span>
+          </td>
+          <td>
+            <span class="table-up">
+              <a class="indigo-text">
+
+              </a>
+            </span>
+            <span class="table-down">
+              <a class="indigo-text">
+
+              </a>
+            </span>
+          </td>
+          <td>
+            <span class="table-remove">
+              <button type="button" size="sm" class="my-0">Remove</button>
+            </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->

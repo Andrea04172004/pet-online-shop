@@ -1,0 +1,66 @@
+<mat-toolbar>
+  <span>User Information</span>
+  <span class="edit-user-spacer"></span>
+  <button id="close-form-button" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+
+</mat-toolbar>
+<div class="container w-100 mt-5">
+  <form [formGroup]="userForm" class="normal-form">
+    <div class="control-column">
+      <mat-grid-list cols="1" rowHeight="200">
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field appearance="standard">
+              <mat-label>First Name</mat-label>
+              <input id="first-name-input" formControlName="firstName" matInput placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Last Name</mat-label>
+              <input id="last-name-input" formControlName="lastName" matInput placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput placeholder="Email">
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="controls-container">
+            <mat-form-field appearance="standard">
+              <mat-select id="phone-select-dropdown" (click)="onChangePhone()" formControlName="phoneList" required placeholder="Phone number">
+
+                <mat-option *ngFor="let phone of phoneList" [value]="phone">{{phone}}</mat-option>
+
+                <mat-option (click)="onAddPhone()">Add Phone</mat-option>
+                <!--    here should be list of phones-->
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-select id="address-select-dropdown" (click)="onChangeAddress()" formControlName="addressList" required
+                          placeholder="Address">
+                <mat-option (click)="onAddAddress()">Add address</mat-option>
+                <mat-option *ngFor="let address of addressList" [value]="address">
+                  {{getFormattedRow(address)}}
+                </mat-option>
+
+                <!--    here should be list of addresses-->
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+              <mat-select id="roles-select-dropdown" (click)="onChangeRole()" formControlName="role" required placeholder="Role">
+                <mat-option id="role" *ngFor="let role of roles" [value]="role.value">
+                  {{role.value}}
+                </mat-option>
+                <!--    here should be list of phones-->
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button id="submit-button" mat-raised-button color="primary" style="border: solid" type="submit" [disabled]="userForm.invalid" (click)="onSubmit()">Submit</button>
+          <button id="clear-button" mat-raised-button color="warn" style="border: solid" (click)="onClear()">Clear</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </form>
+</div>

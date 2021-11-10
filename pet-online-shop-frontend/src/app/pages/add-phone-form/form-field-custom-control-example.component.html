@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <span>Phone</span>
+  <span class="spacer"></span>
+  <button class="btn-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<div [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <my-tel-input formControlName="tel" required (itemEvent)="getError($event)"></my-tel-input>
+    <mat-icon matSuffix>phone</mat-icon>
+    <mat-hint>Include area code</mat-hint>
+<!--    <mat-error *ngIf="tel.hasError('notUnique')">Phone is exist</mat-error>-->
+  </mat-form-field>
+  <button mat-raised-button color="primary" style="border: solid" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+  <button mat-raised-button color="warn" style="border: solid" (click)="onClear()">Clear</button>
+</div>

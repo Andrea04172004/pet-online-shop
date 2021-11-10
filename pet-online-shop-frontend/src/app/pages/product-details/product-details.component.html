@@ -1,0 +1,101 @@
+<div class="container mt-3  mb-3">
+  <section id="productDetails" class="pb-5">
+
+    <div class="card mt-5" id="prodCard">
+      <div class="row mt-5">
+        <div class="col col-sm-auto mx-2" id="imgSelect">
+          <div *ngFor="let images of product.image" (mouseover)="selectedImg= images">
+            <img [src]="images" alt="..." class="img-thumbnail imgList my-1" style="width: 5rem; height: 5rem">
+          </div>
+        </div>
+        <div class="col col-lg-auto">
+          <div>
+            <img [src]="selectedImg" alt="..." class="img-thumbnail" style="width: 25rem; height: 25rem">
+          </div>
+        </div>
+
+        <div class="col-lg-5 mr-3 text-center text-md-left">
+          <h1
+            class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+            <strong>{{product.name}}</strong>
+          </h1>
+          <h4 class="badge badge-pill badge-danger mb-4 ml-xl-0 ml-4">{{product.productLabel}}</h4>
+          <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+            <h2 class="red-text font-weight-bold">
+              <strong>{{product.price}}$</strong>
+            </h2>
+          </h3>
+
+
+          <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+
+            <div class="card">
+
+
+              <div class="card-header" role="tab" id="headingOne1">
+                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                   aria-controls="collapseOne1">
+                  <h5 class="mb-0">
+                    Description
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+
+
+              <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                   data-parent="#accordionEx">
+                <div class="card-body">
+                  Description
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+
+
+              <div class="card-header" role="tab" id="headingTwo2">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                   aria-expanded="false" aria-controls="collapseTwo2">
+                  <h5 class="mb-0">
+                    Details
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+
+
+              <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                   data-parent="#accordionEx">
+                <div class="card-body">
+                  Details
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row mt-3 mb-4">
+
+            <div class="col-md-12 text-center text-md-left text-md-right align-items-center">
+              <button id="addProd"
+                      class="btn btn-outline-success rounded-pill float-right" (click)="addProductToCard(product.id)">
+                Add to cart
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-basket" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                        d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

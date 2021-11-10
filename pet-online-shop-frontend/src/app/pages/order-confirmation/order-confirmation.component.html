@@ -1,0 +1,142 @@
+
+<div id="datatable" class="datatable" xmlns:background-color="http://www.w3.org/1999/xhtml">
+
+  <div class="card-header bg-gradient-primary-to-secondary text-center text-white rounded-0">All ordered products</div>
+  <table id="table" class="table mb-0 table-responsive-lg table-hover border solid 1px ">
+    <thead>
+    <tr id="row">
+      <th scope="col" class="border-right">Id</th>
+      <th scope="col" class="border-right">Image</th>
+      <th scope="col" class="border-right">Product name</th>
+      <th scope="col" class="border-right">Product price</th>
+      <th scope="col" class="border-right">Quantity</th>
+      <th scope="col" class="border-right">Total</th>
+      <th scope="col" class="border-right">WishList</th>
+      <th scope="col" class="border-right">Notifications</th>
+    </tr>
+    </thead>
+    <tbody>
+
+<!--    <div *ngFor="let prod of notAvailableProducts">-->
+    <tr id="valuesRow" *ngFor="let line of getLineItems(); let i = index">
+<!--        mat-row [ngClass]="{'make-gold': isntAvailable == true}">-->
+<!--        [ngClass]="isntAvailable === true ? rowColor('red') : rowColor('transparent')">-->
+
+
+<!--        ng-style="1==1 && {'background-color':'beige'}">-->
+<!--      <div *ngIf="prod.id == line.product.id" style="background-color: beige">-->
+<!--      <form *ngIf="isntAvailable==true" style="background-color: #0b7ec4">-->
+      <td id="id" class="border-right">{{i + 1}}</td>
+      <td id="img" class="border-right">
+        <div>
+          <img alt="productImage" style="width: 50px; cursor: pointer; outline: none"
+               routerLink="/product-details/{{line.product.id}}"
+               [src]="line.product.image[0]"></div>
+      </td>
+      <td id="name" class="border-right">{{line.product.name}}</td>
+      <td id="price" class="border-right" step ="0.01" type="number">{{ line.product.price | number: '1.2-2' }}</td>
+
+        <td id="quantityButtons" class="border-right">
+<!--          <form [formGroup]="settingForm">-->
+<!--          <input type="number" formControlName="capacity">-->
+          <button (click)="minus(line.id)">-</button>
+            <input
+              class="font-weight-200 quantityInput text-center" style="width: 35px;"
+              type="text" [value]="line.quantity"/>
+<!--          <div id="quantity">{{line.quantity}}</div>-->
+<!--          <label>-->
+<!--            <input type="number" formControlName="quantity" style="width: 20px">-->
+<!--          </label>{{line.quantity}}-->
+          <button (click)="plus(line.id)">+</button>
+<!--          </form>-->
+        </td>
+
+      <td id="subPrice" class="border-right" step ="0.01">{{line.quantity*line.product.price | number: '1.2-2' }}</td>
+      <td id="buttonWishList" class="border-right text-center">
+        <button (click)="addProductToWishList(line.product.id, 1)" mat-icon-button color="primary" aria-label="Example icon button with a heart icon"
+                class="btn-outline-blue-soft">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </td>
+<!--      <td id="notifications" class="border-right">{{notEnoughNotification + line.product.quantity + " available"}}</td>-->
+      <td id="notifications" class="border-right">{{chooseNotification(line.id)}}</td>
+      <!--      </form>-->
+<!--      </div>-->
+    </tr>
+
+<!--    <tr *ngFor="let notAvLines of getLinesWithNotAvailableProducts(); let i = index" style="color: palevioletred">-->
+<!--      &lt;!&ndash;        style="background-color: #0b7ec4"&ndash;&gt;-->
+<!--      <td id="idNotAvailableProd">{{i + 1}}</td>-->
+<!--      <td>-->
+<!--        <div id="imgProd">-->
+<!--          <img alt="productImage" style="width: 50px; cursor: pointer; outline: none"-->
+<!--               routerLink="/product-details/{{notAvLines.product.id}}"-->
+<!--               [src]="notAvLines.product.image[0]"></div>-->
+<!--      </td>-->
+<!--      <td id="nameNotAvailableProd">{{notAvLines.product.name}}</td>-->
+<!--      <td id="priceNotAvailableProd">{{notAvLines.product.price}}</td>-->
+<!--      <td id="quantityNotAvailableProd">{{notAvLines.quantity}}</td>-->
+<!--      <td id="subPriceNotAvailableProd">{{notAvLines.subPrice}}</td>-->
+
+<!--    </tr>-->
+
+
+<!--    </div>-->
+    </tbody>
+  </table>
+              <div id="totalAmount" class="text-gray-600 font-weight-700 text-right mr-md-5 m-3">
+                {{"Total amount: " + getTotalAmount()}}</div>
+
+
+  <div *ngIf="notAvailableProducts?.length > 0">
+    <div class="card-header text-dark text-center rounded-0 bg-primary-soft font-weight-bold font-weight-700">
+      Products that are not available for order
+    </div>
+    <table class="table mb-0 table-hover table-responsive-lg border-collapse">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Product name</th>
+        <th scope="col">Product price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr id="notAvailableProducts" *ngFor="let product of notAvailableProducts; let i = index">
+                                                            <!--        style="background-color: #0b7ec4"-->
+        <td id="idNotAvailableProducts">{{i + 1}}</td>
+        <td>
+          <div id="imgProduct">
+            <img alt="productImage" style="width: 50px; cursor: pointer; outline: none"
+                 routerLink="/product-details/{{product.id}}"
+                 [src]="product.image[0]"></div>
+        </td>
+        <td id="nameNotAvailableProducts">{{product.name}}</td>
+        <td id="priceNotAvailableProducts">{{product.price}}</td>
+        <td id="quantityNotAvailableProducts">{{product.quantity}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <div id="chooseAction" class="text-center text-black font-weight-700"> Choose your action</div>
+  <form>
+<!--    <button [disabled]="notAvailableProducts.length>0" (submit)="onSubmit()" id="confirmCart"-->
+<!--            type="submit" class="btn btn-outline-primary btn-lg float-right m-lg-4">Confirm-->
+<!--    </button>-->
+  </form>
+  <button id="createOrder"
+          (click)="deleteLineItemByProdId()"
+          type="button" class="btn btn-outline-danger btn-lg float-right m-lg-4"> Delete
+  </button>
+
+  <button id="wishListEntity" (click)="onSubmit()"
+          type="button" class="btn btn-outline-green btn-lg float-right m-lg-4"> Wish List
+  </button>
+
+</div>
+<!--(click)="getLineItems()"-->

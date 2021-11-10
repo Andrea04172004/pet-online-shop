@@ -1,0 +1,44 @@
+<table id="prodAddForm" class="table table-bordered table-responsive-md table-striped text-center" >
+  <tr>
+    <td>
+      <input id="name" type="text" class="form-control" name="name" placeholder="Name" [(ngModel)]="name">
+    </td>
+    <td class="pb-0">
+        <input id="img" type="text" class="form-control" placeholder="Image" [(ngModel)]="inputImage">
+    </td>
+    <td>
+      <input id="price" type="number" min="1" class="form-control" placeholder="Price" name="price" [(ngModel)]="price">
+    </td>
+    <td>
+
+      <input id="expiration" type="date" class="form-control" name="expirationDate" placeholder="Expiration date"
+             [(ngModel)]="expirationDate">
+
+    </td>
+    <td>
+      <input id="quantity" type="number" min="1" class="form-control" placeholder="Quantity" name="quantity" [(ngModel)]="quantity">
+    </td>
+    <td>
+      <select id="categorySelect" class="custom-select" [(ngModel)]="category" name="category">
+        <option *ngFor="let category of getAllCategories()"
+                value="{{category.name}}">{{category.name}}</option>
+      </select>
+    </td>
+
+    <td>
+      <select id="labelSelect" class="custom-select" [(ngModel)]="productLabel">
+        <option contenteditable="true"
+                *ngFor="let label of keys(labels)"
+                [ngValue]="label">
+          {{label}}</option>
+      </select>
+    </td>
+
+    <td>
+      <button id= "addProd" (click)="addProduct()" type="submit" class="btn btn-block btn-success">Submit</button>
+    </td>
+
+  </tr>
+
+</table>
+

@@ -1,0 +1,52 @@
+ <div class="container w-50 mt-5">
+   <form class="container w-75 register-form" #form="ngForm" (ngSubmit)="onSubmit()">
+     <div class="card text-center">
+       <div class="card-header bg-dark text-light">
+         <p class="header-font display-4">Sign In</p>
+       </div>
+       <div class="card-body">
+         <form class="container w-75">
+           <div class="form-row">
+             <div class="form-group col-md-6">
+               <label>Login</label>
+               <input id="LoginWindow" type="text" name="email" class="form-control" [(ngModel)]="userName">
+             </div>
+             <div class="form-group col-md-6">
+               <label>Password</label>
+               <input id="PasswordWindow" type="text" name="password" class="form-control" [(ngModel)]="password">
+             </div>
+           </div>
+         </form>
+
+
+       </div>
+       <div class="card-footer">
+         <button id="signInButton" type="submit" class="form-submit">Sign In
+         </button>
+
+         <!--                <a href="#" class="btn btn-primary btn-lg">Sign In</a>-->
+         <!--                <a href="#" class="btn btn-primary btn-lg">Forgot login or password</a>-->
+       </div>
+     </div>
+   </form>
+
+   <strong>Sample Users</strong>
+   <table style="width: 100%;" id="sampleLoginTable">
+     <tr>
+       <td><a
+         (click)="fillLoginFields('admin@mail.com','123')"
+         href="javascript:void(0)">admin@mail.com</a></td>
+       <td><a
+         (click)="fillLoginFields('andrew@mail.com','123')"
+         href="javascript:void(0)">andrew@mail.com</a></td>
+       <!--      <td><a-->
+       <!--        (click)="fillLoginFields('employee1@email.com','123')"-->
+       <!--        href="javascript:void(0)">employee1</a></td>-->
+       <!--      <td><a-->
+       <!--        (click)="fillLoginFields('manager1@email.com','123')"-->
+       <!--        href="javascript:void(0)">manager1</a></td>-->
+     </tr>
+   </table>
+
+
+ </div>

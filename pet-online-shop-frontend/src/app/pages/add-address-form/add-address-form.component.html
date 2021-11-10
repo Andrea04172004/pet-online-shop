@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <span>Address</span>
+  <span class="example-spacer"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+
+</mat-toolbar>
+<form [formGroup]="addressForm" class="example-form">
+  <p>
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>City</mat-label>
+      <input id="city-input" matInput placeholder="Ex. San Francisco" formControlName="city">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Street</mat-label>
+      <input id="street-input" matInput placeholder="Ex. Ocean Ave" formControlName="street">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Building number</mat-label>
+      <input id="building-number-input" matInput placeholder="Ex. 1234" formControlName="buildingNumber">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>Apartment</mat-label>
+      <input id="apartment-number-input" matInput placeholder="Ex. 3b" formControlName="apartmentNumber">
+    </mat-form-field>
+  </p>
+  <button id="submit-address-button" mat-raised-button color="primary" style="border: solid" type="submit" [disabled]="addressForm.invalid" (click)="onSubmit()">Submit</button>
+  <button id="clear-address-button" mat-raised-button color="warn" style="border: solid" (click)="onClear()">Clear</button>
+</form>

@@ -1,0 +1,13 @@
+<div class="container-fluid">
+<h1 mat-dialog-title class="text-center">Move to wish list</h1>
+<div mat-dialog-content class="p-0">
+  <ul class="list-group">
+    <li  *ngFor="let wish of wishList"
+        (click)="onSelectWishList(wish.id)"
+      class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+      {{wish.title}}
+      <h1 class="mb-1"><span class="badge badge-warning">{{wish.productDto.length}}</span></h1>
+    </li>
+  </ul>
+</div>
+</div>

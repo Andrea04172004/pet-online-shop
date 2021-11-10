@@ -1,0 +1,51 @@
+<div class="navbar navbar-expand shadow navbar-light bg-white d-flex bd-highlight mb-3">
+  <div class="mr-auto bd-highlight">
+    <button id="toggleSidebar" class="btn" (click)="toggleSidebar()" *ngIf="currentUser">
+      <i class="fas fa-bars h1 m-0"></i>
+    </button>
+  </div>
+  <div class="bd-highlight">
+    <button id="userCart" *ngIf="currentUser"
+            class="btn p-0" mat-button matTooltip="Cart" routerLink="/cart">
+      <i class="fas fa-shopping-basket h1 m-0"></i>
+    </button>
+  </div>
+  <div class="bd-highlight">
+    <button id="signUp" *ngIf="currentUser == null"
+      class="btn btn-outline-success btn-rounded mx-2" routerLink="/register">
+      Sign up
+    </button>
+  </div>
+  <div class="bd-highlight">
+    <button id="signIn" *ngIf="currentUser == null"
+      class="btn btn-outline-success btn-rounded" routerLink="/login">
+      Sign in
+    </button>
+  </div>
+  <div class="bd-highlight ml-2">
+    <div *ngIf="currentUser"
+      class="nav-item dropdown no-caret dropdown-user">
+      <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" role="button"
+         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt h1 m-0"></i></a>
+      <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+           aria-labelledby="navbarDropdownUserImage">
+        <h6 class="dropdown-header d-flex align-items-center">
+          <img class="dropdown-user-img" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"/>
+          <div class="dropdown-user-details">
+            <div class="dropdown-user-details-name" id="firstName">First name</div>
+            <div class="dropdown-user-details-email" id="userEmail">121111</div>
+          </div>
+        </h6>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" routerLink="/user-details">
+          <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+          Profile
+        </a>
+        <a class="dropdown-item" (click)="logout()" id="logout">
+          <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+          Logout
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

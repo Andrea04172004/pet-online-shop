@@ -1,0 +1,90 @@
+<nav class="navbar shadow-sm navbar-light bg-white" id="sidenavAccordion">
+  <a routerLink="/" class="h2 m-0">Online shop</a>
+  <button class="btn  d-flex justify-content-end" (click)="toggleSidebar()">
+    <i class="fas fa-times h1 m-0"></i>
+  </button>
+</nav>
+<div>
+  <nav class="sidenav shadow-right sidenav-light">
+    <div class="sidenav-menu">
+      <div class="nav accordion" id="accordionSidenav">
+        <div class="sidenav-menu-heading">Online shop</div>
+
+        <a class="nav-link collapsed" id="allProductsBtn" routerLink="/all-products">
+          <div class="nav-link-icon"><i class="fas fa-th"></i></div>
+          All products
+        </a>
+        <a class="nav-link collapsed" id="cartBtn" routerLink="/cart">
+          <div class="nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+          Cart
+        </a>
+        <a class="nav-link collapsed" id="wishBtn" routerLink="/wish-list">
+          <div class="nav-link-icon"><i class="fas fa-heart"></i></div>
+          Wish list
+        </a>
+
+        <div *ngIf="!currentUser|| currentUser.role == role.ADMIN && role.MANAGER">
+        <div class="sidenav-menu-heading">Dashboards</div>
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
+           aria-controls="collapsePages">
+          <div class="nav-link-icon"><i class="fas fa-border-all"></i></div>
+          Dashboards
+          <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
+          <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+            <!--                1 block-->
+            <a class="nav-link collapsed" data-toggle="collapse" data-target="#pagesCollapseAccount"
+               aria-expanded="false" aria-controls="pagesCollapseAccount">
+              Products
+              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+
+
+            <div class="collapse" id="pagesCollapseAccount" data-parent="#accordionSidenavPagesMenu">
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link" routerLink="/product-dashboard" id="productDash">
+                  Product dashboard
+                </a>
+              </nav>
+            </div>
+            <!--                1 block-->
+
+            <!--                2 block-->
+            <a class="nav-link collapsed" data-toggle="collapse"
+               data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+              Orders
+              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="pagesCollapseAuth" data-parent="#accordionSidenavPagesMenu">
+              <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesAuth">
+                <a  routerLink="/order-dashboard" id="orderDash"
+                    class="nav-link collapsed">
+                  All orders
+                </a>
+              </nav>
+            </div>
+            <!--                2 block-->
+
+            <a class="nav-link collapsed" data-toggle="collapse"
+               data-target="#pagesCollapseAuth1" aria-expanded="false" aria-controls="pagesCollapseAuth1">
+              Users
+              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="pagesCollapseAuth1" data-parent="#accordionSidenavPagesMenu">
+              <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesAuth1">
+                <a  routerLink="/user-list" id="userDash"
+                    class="nav-link collapsed">
+                  All users
+                </a>
+              </nav>
+            </div>
+
+
+          </nav>
+        </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

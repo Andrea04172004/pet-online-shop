@@ -1,0 +1,136 @@
+<div class="mynav  d-flex align-items-center justify-content-center">
+  <h1 class="text-center display-1"> Your cart</h1>
+</div>
+
+<div class="container" id="cartContainer">
+  <section class="mt-5 mb-4">
+    <div class="row">
+      <div class="col-lg-8">
+
+
+        <div class="card mb-4">
+          <div class="card-body">
+
+            <div *ngIf="show">
+              <div id="emptyCartBlock">
+                <div class="row justify-content-center mb-2">
+                  <img style="width: 100px;" [src]="emptyCartImage" id="emptyCartImg">
+                </div>
+                <div class="row justify-content-center">
+                  <h1 class="text-center mb-1">Your cart currently empty</h1>
+                </div>
+                <div class="row justify-content-center">
+                  <button class="btn btn-success " routerLink="/all-products" id="goShoppingBtn">Go shopping</button>
+                </div>
+              </div>
+            </div>
+
+
+<!--            <div *ngIf="itemCount==0" id="emptyCartBlock">-->
+<!--              <div class="row justify-content-center mb-2">-->
+<!--                <img style="width: 100px;" [src]="emptyCartImage" id="emptyCartImg">-->
+<!--              </div>-->
+<!--              <div class="row justify-content-center">-->
+<!--                <h1 class="text-center mb-1">Your cart currently empty</h1>-->
+<!--              </div>-->
+<!--              <div class="row justify-content-center">-->
+<!--                <button class="btn btn-success " routerLink="/all-products" id="goShoppingBtn">Go shopping</button>-->
+<!--              </div>-->
+
+<!--            </div>-->
+            <div class="row mb-4 " id="lineItems" *ngFor="let line of getLineItemsDto();let i = index">
+              <!--                         Image-->
+
+              <div class="col-md-5 col-lg-3 col-xl-3">
+                <h2><span id="prodLabel-{{i+1}}" class="badge badge-pill badge-warning ml-2 float-left">{{line.product.productLabel}}</span>
+                </h2>
+                <div class="rounded mb-3 mb-md-0">
+                  <img class="img-fluid w-100" style="width: 15px; cursor: pointer; outline: none" id="prodImg-{{i+1}}"
+                       [src]="line.product.image[0]" alt="Sample"
+                       routerLink="/product-details/{{line.product.id}}" >
+                </div>
+              </div>
+              <!--                         Image-->
+              <!--                         Other-->
+              <div class="col-md-7 col-lg-9 col-xl-9">
+                <div>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h1 id="prodName-{{i+1}}">{{line.product.name}}</h1>
+                      <h4 class="mb-1 text-muted text-uppercase small">{{line.product.category}}</h4>
+                    </div>
+                    <div>
+
+                      <div class="input-group mb-3" id="quantityChange">
+                        <div class="input-group-prepend">
+                          <button id="plus-{{i+1}}" (click)="plusQuantity(line.id)"
+                                  class="btn btn-outline-success rounded-0">
+                            <i class="fas fa-plus"></i></button>
+                        </div>
+                        <input
+                          class="font-weight-normal quantityInput text-center rounded-0 plusMinInput border-1"
+                          min="0" max="100" id="lineItem-{{i+1}}-quantity-{{line.quantity}}" type="text" [value]="line.quantity"/>
+                        <div class="input-group-prepend">
+                          <button id="minus-{{i+1}}" (click)="minusQuantity(line.id)"
+                                  class="btn btn-outline-danger rounded-0"><i
+                            class="fas fa-minus"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="deleteButtons">
+                      <button id="delItem-{{i+1}}" (click)="deleteLineItem(line.product.name, line.id)"
+                              class="btn btn-outline-danger card-link-secondary small text-uppercase mr-3">
+                        <i class="fas fa-trash-alt"></i>
+                        Remove item
+                      </button>
+                    </div>
+
+                    <h2 id="total">{{lineTotal(line.quantity, line.product.price)}}&#36;</h2>
+                  </div>
+
+                </div>
+              </div>
+              <!--                         Other-->
+              <hr class="mb-4">
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-4">
+        <div class="card mb-4" id="amount">
+          <div class="card-body">
+            <h1 class="card-title text-center font-weight-normal pb-2">Your amount</h1>
+
+            <div class="pb-2">
+              <h3 class="card-text float-left m-0">Temporary amount</h3>
+              <h3 class="card-text float-right">{{cartTotal()}} &#36;</h3>
+            </div>
+            <br>
+            <hr>
+
+            <div class="pb-4">
+              <h2 class="card-text float-left">Total amount</h2>
+              <h2 class="card-text float-right">{{cartTotal()}} &#36;</h2>
+            </div>
+
+            <button id="checkout" type="submit"
+                    class="btn btn-block btn-outline-success form-rounded mt-4" routerLink="/full-checkout/">Checkout
+            </button>
+<!--            routerLink="/order-confirmation/"-->
+<!--            (click)="goCheck(cart)" [disabled]="itemCount == 0"-->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+
